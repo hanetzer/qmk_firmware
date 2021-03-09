@@ -1,5 +1,31 @@
 MCU_ORIG := $(MCU)
 
+ifneq ($(findstring LPC11U35, $(MCU)),)
+  # Cortex version
+  MCU = cortex-m0
+
+  # ARM version, CORTEX-M0/M1 are 6, CORTEX-M3/M4/M7 are 7
+  ARMV = 6
+
+  ## chip/board settings
+  # - the next two should match the directories in
+  #   <chibios>/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)
+  MCU_FAMILY = LPC
+  MCU_SERIES = LPC11Uxx
+  # Linker script to use
+  # - it should exist either in <chibios>/os/common/ports/ARMCMx/compilers/GCC/ld/
+  #   or <keyboard_dir>/ld/
+  MCU_LDSCRIPT ?= LPC11U35_401
+
+  # Startup code to use
+  #  - it should exist in <chibios>/os/common/ports/ARMCMx/compilers/GCC/mk/
+  MCU_STARTUP ?= lpc11uxx
+
+  # Board: it should exist either in <chibios>/os/hal/boards/,
+  # <keyboard_dir>/boards/, or drivers/boards/
+  BOARD ?= EA_LPCXPRESSO_BB_11U14
+endif
+
 ifneq ($(findstring MKL26Z64, $(MCU)),)
   # Cortex version
   MCU = cortex-m0plus
