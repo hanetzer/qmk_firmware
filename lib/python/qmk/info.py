@@ -1,6 +1,7 @@
 """Functions that help us generate and use info.json files.
 """
 import json
+import re
 from collections.abc import Mapping
 from glob import glob
 from pathlib import Path
@@ -169,6 +170,9 @@ def _pin_name(pin):
     """
     pin = pin.strip()
 
+    pattern_generic = re.compile(r"^[A-K]\d{1,2}$")
+    pattern_lpc = re.compile(r"^PIO\d{1}_\d{1,2}$")
+
     if not pin:
         return None
 
@@ -178,7 +182,10 @@ def _pin_name(pin):
     elif pin == 'NO_PIN':
         return None
 
-    elif pin[0] in 'ABCDEFGHIJK' and pin[1].isdigit():
+    elif pattern_generic.fullmatch(pin):
+        return pin
+
+    elif pattern_lpc.fullmatch(pin):
         return pin
 
     raise ValueError(f'Invalid pin: {pin}')
