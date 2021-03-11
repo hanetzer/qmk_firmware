@@ -171,7 +171,7 @@ def _pin_name(pin):
     pin = pin.strip()
 
     pattern_generic = re.compile(r"^[A-K]\d{1,2}$")
-    pattern_lpc = re.compile(r"^PIO\d{1}_\d{1,2}$")
+    pattern_lpc = re.compile(r"^GPIO\d{1}_\d{1,2}$")
 
     if not pin:
         return None

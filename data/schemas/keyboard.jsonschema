@@ -188,7 +188,7 @@
                                 },
                                 {
                                     "type": "string",
-                                    "pattern": "^PIO\\d{1}_\\d{1,2}$"
+                                    "pattern": "^GPIO\\d{1}_\\d{1,2}$"
                                 }
                             ]
                         }
@@ -211,7 +211,7 @@
                             },
                             {
                                 "type": "string",
-                                "pattern": "^PIO\\d{1}_\\d{1,2}$"
+                                "pattern": "^GPIO\\d{1}_\\d{1,2}$"
                             }
                         ]
                     }
@@ -233,7 +233,7 @@
                             },
                             {
                                 "type": "string",
-                                "pattern": "^PIO\\d{1}_\\d{1,2}$"
+                                "pattern": "^GPIO\\d{1}_\\d{1,2}$"
                             }
                         ]
                     }

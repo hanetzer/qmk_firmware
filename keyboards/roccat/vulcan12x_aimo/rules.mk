@@ -18,7 +18,8 @@ MIDI_ENABLE = no
 BLUETOOTH_ENABLE = no
 AUDIO_ENABLE = no
 
-CUSTOM_MATRIX = lite
-SRC += matrix.c
-
+CUSTOM_MATRIX = no
+# SRC += matrix.c
+# SRC += board.c
+BOARD = GENERIC_LPC11U35
 LAYOUTS = fullsize_ansi
