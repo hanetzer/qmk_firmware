@@ -207,11 +207,12 @@ else
         COMMON_VPATH += $(DRIVER_PATH)/eeprom
         SRC += eeprom_driver.c eeprom_transient.c
       endif
-	else ifeq ($(PLATFORM),PICO_SDK)
-      SRC += $(PLATFORM_COMMON_DIR)/eeprom.c
     else ifeq ($(PLATFORM),ARM_ATSAM)
       # arm_atsam EEPROM
       SRC += $(PLATFORM_COMMON_DIR)/eeprom.c
+    else ifeq ($(PLATFORM),PICO_SDK)
+      SRC += $(PLATFORM_COMMON_DIR)/eeprom.c
+      SRC += $(PLATFORM_COMMON_DIR)/flash_pico.c
     else ifeq ($(PLATFORM),TEST)
       # Test harness "EEPROM"
       SRC += $(PLATFORM_COMMON_DIR)/eeprom.c
