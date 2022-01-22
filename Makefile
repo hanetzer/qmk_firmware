@@ -60,6 +60,44 @@ include paths.mk
 TEST_OUTPUT_DIR := $(BUILD_DIR)/test
 ERROR_FILE := $(BUILD_DIR)/error_occurred
 
+# Helper function to process the newt element of a space separated path
+# It works a bit like the traditional functional head tail
+# so the CURRENT_PATH_ELEMENT will become the new head
+# and the PATH_ELEMENTS are the rest that are still unprocessed
+define NEXT_PATH_ELEMENT
+    $$(eval CURRENT_PATH_ELEMENT := $$(firstword  $$(PATH_ELEMENTS)))
+    $$(eval PATH_ELEMENTS := $$(wordlist  2,9999,$$(PATH_ELEMENTS)))
+endef
+
+# We change the / to spaces so that we more easily can work with the elements
+# separately
+PATH_ELEMENTS := $(subst /, ,$(STARTING_DIR))
+# Initialize the path elements list for further processing
+$(eval $(call NEXT_PATH_ELEMENT))
+
+
+# Phony targets to enable a few simple make commands outside the main processing below.
+.PHONY: list-keyboards
+list-keyboards:
+	util/list_keyboards.sh | sort -u | tr '\n' ' '
+
+.PHONY: generate-keyboards-file
+generate-keyboards-file:
+	util/list_keyboards.sh | sort -u
+
+.PHONY: clean
+clean:
+	echo -n 'Deleting .build/ ... '
+	rm -rf $(BUILD_DIR)
+	echo 'done.'
+
+.PHONY: distclean
+distclean: clean
+	echo -n 'Deleting *.bin, *.hex, *.elf and *.uf2... '
+	rm -f *.bin *.hex *.uf2 *.elf
+	echo 'done.'
+
+
 .DEFAULT_GOAL := all:all
 
 
