@@ -20,13 +20,6 @@
 #    include "rgblight.h"
 #endif
 
-/** \brief Suspend idle
- *
- * FIXME: needs doc
- */
-void suspend_idle(uint8_t time) {
-}
-
 // TODO: This needs some cleanup
 
 /** \brief Run keyboard level Power down
